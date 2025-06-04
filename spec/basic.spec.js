@@ -3420,6 +3420,27 @@ describe("HtmlWebpackPlugin", () => {
     );
   });
 
+  it('should allow to inject scripts with a type="text/javascript" attribute', done => {
+    testHtmlPlugin(
+      {
+        mode: 'production',
+        entry: path.join(__dirname, 'fixtures/index.js'),
+        output: {
+          path: OUTPUT_DIR,
+          filename: 'index_bundle.js'
+        },
+        plugins: [new HtmlWebpackPlugin({
+          scriptLoading: 'text/javascript'
+        })]
+      },
+      [
+        /<script type="text\/javascript" src="index_bundle.js"><\/script>.+<body>/
+      ],
+      null,
+      done
+    );
+  });
+
   it('should allow to inject scripts with a defer="defer" attribute to the body', (done) => {
     testHtmlPlugin(
       {

@@ -176,11 +176,12 @@ class HtmlWebpackPlugin {
       options.scriptLoading !== "defer" &&
       options.scriptLoading !== "blocking" &&
       options.scriptLoading !== "module" &&
-      options.scriptLoading !== "systemjs-module"
+      options.scriptLoading !== "systemjs-module" &&
+      options.scriptLoading !== "text/javascript"
     ) {
       /** @type {Logger} */
       (this.logger).error(
-        'The "scriptLoading" option need to be set to "defer", "blocking" or "module" or "systemjs-module"',
+        'The "scriptLoading" option need to be set to "defer", "blocking" or "module" or "systemjs-module" or "text/javascript"',
       );
     }
 
@@ -1068,6 +1069,8 @@ class HtmlWebpackPlugin {
         attributes.type = "module";
       } else if (this.options.scriptLoading === "systemjs-module") {
         attributes.type = "systemjs-module";
+      } else if (this.options.scriptLoading === "text/javascript") {
+        attributes.type = "text/javascript";
       }
 
       attributes.src = src;
